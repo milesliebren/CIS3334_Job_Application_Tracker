@@ -5,11 +5,15 @@ import 'models/job_application.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox<JobApplication>('jobApplications'); // Use the Hive model
+
+  // Register the generated adapter
+  Hive.registerAdapter(JobApplicationAdapter());
 
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   @override

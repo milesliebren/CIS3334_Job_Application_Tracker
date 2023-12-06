@@ -19,13 +19,15 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> openHiveBox() async {
+    print('Opening Hive box...');
     await Hive.openBox<JobApplication>('jobApplications');
     jobApplicationsBox = Hive.box<JobApplication>('jobApplications');
+
     // Add sample job applications for testing if the box is empty
     if (jobApplicationsBox!.isEmpty) {
       await addSampleJobApplications();
+      setState(() {});
     }
-    setState(() {});
   }
 
   Future<void> addSampleJobApplications() async {
