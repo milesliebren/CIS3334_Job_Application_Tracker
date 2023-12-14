@@ -13,7 +13,6 @@ void main() async {
 
   runApp(MyApp());
 }
-//test
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,7 +20,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Job Application Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.indigo, // Set your primary color
+          accentColor: Colors.teal,    // Set your accent color
+        ),
+        fontFamily: 'Roboto',        // Choose a modern font
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.teal,    // Set your button primary color
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          ),
+        ),
       ),
       home: HomeScreen(),
     );
