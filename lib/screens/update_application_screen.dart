@@ -80,7 +80,7 @@ class _UpdateApplicationScreenState extends State<UpdateApplicationScreen> {
                   status: selectedStatus,
                 );
 
-                // TODO: Update the job application in your data storage (Hive, Firebase, etc.)
+                // Update the job application in your data storage (Hive, Firebase, etc.)
                 // For example, if using Hive:
                 widget.application
                   ..companyName = updatedCompanyName
@@ -90,7 +90,7 @@ class _UpdateApplicationScreenState extends State<UpdateApplicationScreen> {
                 widget.onUpdate(updatedApplication); // Notify the parent about the update
 
                 // Close the update screen after updating
-                Navigator.pop(context, updatedApplication); // Return the updated application to the previous screen
+                Navigator.popUntil(context, ModalRoute.withName('/')); // Navigate back to the home screen
               },
               child: Text('Update'),
             ),

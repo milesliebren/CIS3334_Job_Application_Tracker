@@ -5,7 +5,7 @@ import 'package:cis3334_job_application_tracker/screens/update_application_scree
 class ApplicationDetailsScreen extends StatefulWidget {
   final JobApplication application;
   final Function onDelete;
-  final void Function(JobApplication) onUpdate; // Explicitly define the type of onUpdate
+  final void Function(JobApplication) onUpdate;
 
   ApplicationDetailsScreen({Key? key, required this.application, required this.onDelete, required this.onUpdate}) : super(key: key);
 
@@ -62,6 +62,7 @@ class _ApplicationDetailsScreenState extends State<ApplicationDetailsScreen> {
                         builder: (context) => UpdateApplicationScreen(application: widget.application, onUpdate: widget.onUpdate),
                       ),
                     );
+                    setState(() {});
                   },
                   child: Text('Update'),
                 ),
