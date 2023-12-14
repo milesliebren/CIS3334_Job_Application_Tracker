@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:cis3334_job_application_tracker/screens/application_details_screen.dart';
 import 'package:cis3334_job_application_tracker/models/job_application.dart';
+import 'package:cis3334_job_application_tracker/screens/application_details_screen.dart';
 import 'package:cis3334_job_application_tracker/screens/add_application_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -81,28 +81,44 @@ class _HomeScreenState extends State<HomeScreen> {
       itemCount: jobApplicationsBox.length,
       itemBuilder: (context, index) {
         var application = jobApplicationsBox.getAt(index)!;
-        return ListTile(
-          title: Text(application.companyName),
-          subtitle: Text('${application.position} - ${application.status}'),
-          onTap: () async {
-            // Navigator.push returns the updated application
-            var updatedApplication = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ApplicationDetailsScreen(
-                  application: application,
-                  onDelete: () => handleDelete(index),
-                  onUpdate: (updatedApplication) => handleUpdate(index, updatedApplication), // Pass the handleUpdate function
-                ),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: ListTile(
+              title: Text(
+                application.companyName,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
-            );
+              subtitle: Text(
+                '${application.position} - ${application.status}',
+                style: TextStyle(fontSize: 16),
+              ),
+              onTap: () async {
+                // Navigator.push returns the updated application
+                var updatedApplication = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ApplicationDetailsScreen(
+                      application: application,
+                      onDelete: () => handleDelete(index),
+                      onUpdate: (updatedApplication) =>
+                          handleUpdate(index, updatedApplication), // Pass the handleUpdate function
+                    ),
+                  ),
+                );
 
-            if (updatedApplication != null) {
-              // If the application is updated, update the UI
-              jobApplicationsBox.putAt(index, updatedApplication);
-              setState(() {});
-            }
-          },
+                if (updatedApplication != null) {
+                  // If the application is updated, update the UI
+                  jobApplicationsBox.putAt(index, updatedApplication);
+                  setState(() {});
+                }
+              },
+            ),
+          ),
         );
       },
     );
